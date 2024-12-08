@@ -10,6 +10,7 @@ public class DayOne {
     List<Integer> leftList = new ArrayList<>();
     List<Integer> rightList = new ArrayList<>();
 
+
     public static void main(String[] args) {
         var dayOne = new DayOne();
         dayOne.splitInputsAndSort();

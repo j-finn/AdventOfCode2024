@@ -3,6 +3,7 @@ package main.java;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,5 +31,34 @@ public class FileUtils {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    /**
+     * e.g. input file contains:
+     * 16 17 18 21 23 24 27 24
+     * 74 76 79 81 82 85 85
+     * And we want a list of a list of these integers.
+     */
+    public static List<List<Integer>> readFileAsListOfListOfInts(int dayNumber) {
+
+        List<List<Integer>> listOfList = new ArrayList<>();
+
+        List<String> inputLines = FileUtils.loadContent(dayNumber);
+
+        for (String line : inputLines) {
+
+            // remove all spaces
+            String[] parsedLine = line.split("\\s+");
+
+            List<Integer> integers = new ArrayList<>();
+
+            for (String stringInt : parsedLine) {
+                integers.add(Integer.valueOf(stringInt));
+            }
+            listOfList.add(integers);
+        }
+
+        return listOfList;
     }
 }
