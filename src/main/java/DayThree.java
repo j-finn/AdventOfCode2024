@@ -18,6 +18,12 @@ public class DayThree {
     }
 
 
+    /**
+     * Extracts the pattern mul(X,Y) from a single string, where X and Y are 1-3 digit integers.
+     * <p>
+     * Then we extract the numbers X and Y, multiply them, and then keep a running total of that value
+     * for all pairs of numbers.
+     */
     private int solvePartOne() {
         // extracts the pattern mul(X,Y) into a list
         instructionList = FileUtils.extractPatternFromFileUsingRegex(3, "mul\\(\\d{1,3},\\d{1,3}\\)");
@@ -26,6 +32,10 @@ public class DayThree {
     }
 
 
+    /**
+     * Instructions are "enabled" to begin with. Then, if they follow a do(), they're enabled, if they follow a
+     * don't, they are disabled.
+     */
     private int solvePartTwo() {
         // extracts the patterns: 'mul(X,Y)', 'do()', and 'don't()' into a list
         instructionList = FileUtils.extractPatternFromFileUsingRegex(3, "(mul\\(\\d{1,3},\\d{1,3}\\)|do\\(\\)|don\\'t\\(\\))");
@@ -60,12 +70,10 @@ public class DayThree {
 
 
     /**
-     * Must set up {@link DayThree#instructionList} of mul(123,456) beforehand.
-     * <p>
-     * Extracts the pairs of 1-3 digit numbers and multiply them. Then keep
-     * a running total of that.
+     * Must set up {@link DayThree#instructionList} of mul(X,Y) beforehand, where X and Y
+     * are 1-3 digit integers. We then multiply them and keep a running total of the sums.
      *
-     * @return the sum
+     * @return the overall sum
      */
     private int completeMultiplicationInstructions() {
         Pattern pattern = Pattern.compile("\\d{1,3}");
