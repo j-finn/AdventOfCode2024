@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -61,4 +63,36 @@ public class FileUtils {
 
         return listOfList;
     }
+
+
+    /**
+     * Reads a text file and returns it as a single string concatenated line by line.
+     */
+    public static String readFileAsSingleString(int dayNumber) {
+        List<String> textFileAsListOfString = loadContent(dayNumber);
+
+        String textFileAsString = "";
+
+        for (String string: textFileAsListOfString) {
+            textFileAsString += string;
+        }
+
+        return textFileAsString;
+     }
+
+
+     public static List<String> extractPatternFromFileUsingRegex(int dayNumber, String regex) {
+        String inputString = readFileAsSingleString(dayNumber);
+
+         Pattern pattern = Pattern.compile(regex);
+         Matcher matcher = pattern.matcher(inputString);
+
+         List<String> extractedPattern = new ArrayList<>();
+
+         while (matcher.find()) {
+             extractedPattern.add(matcher.group());
+         }
+
+         return extractedPattern;
+     }
 }
